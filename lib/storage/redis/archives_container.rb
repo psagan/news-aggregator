@@ -13,7 +13,7 @@ module Storage
       end
 
       def add(archive_name)
-
+        redis.sadd(ARCHIVES_SET, archive_name)
       end
 
       private
