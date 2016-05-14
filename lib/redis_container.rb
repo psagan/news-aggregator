@@ -1,3 +1,0 @@
-class RedisContainer
-
-end
