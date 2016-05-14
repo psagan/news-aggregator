@@ -1,4 +1,4 @@
-class ListOfFiles
+class ListOfZipFiles
   PATTERN = /\d{13}\.zip/i
 
   def initialize(host)

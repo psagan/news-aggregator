@@ -1,4 +1,4 @@
-RSpec.describe ListOfFiles do
+RSpec.describe ListOfZipFiles do
   describe "#files" do
     it "returns proper list of files" do
       response = double(
@@ -8,7 +8,7 @@ RSpec.describe ListOfFiles do
       )
       allow(Net::HTTP).to receive(:get_response).and_return(response)
 
-      list_of_files = ListOfFiles.new('')
+      list_of_files = ListOfZipFiles.new('')
       files = list_of_files.files
 
       expect(files).to eq(['1234567891123.zip', '1234567891124.zip'])
@@ -18,7 +18,7 @@ RSpec.describe ListOfFiles do
       response = double(:response, is_a?: false)
       allow(Net::HTTP).to receive(:get_response).and_return(response)
 
-      list_of_files = ListOfFiles.new('')
+      list_of_files = ListOfZipFiles.new('')
 
       expect { list_of_files.files }.to raise_error(RuntimeError)
       expect { list_of_files.files }.to raise_error("Can't access the host")
@@ -32,7 +32,7 @@ RSpec.describe ListOfFiles do
       )
       allow(Net::HTTP).to receive(:get_response).and_return(response)
 
-      list_of_files = ListOfFiles.new('')
+      list_of_files = ListOfZipFiles.new('')
       files = list_of_files.files
 
       expect(files).to eq([])
@@ -46,7 +46,7 @@ RSpec.describe ListOfFiles do
       )
       allow(Net::HTTP).to receive(:get_response).and_return(response)
 
-      list_of_files = ListOfFiles.new('')
+      list_of_files = ListOfZipFiles.new('')
       files = list_of_files.files
 
       expect(files).to eq(['1234567891123.zip', '1234567891124.zip'])
