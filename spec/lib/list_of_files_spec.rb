@@ -37,6 +37,20 @@ RSpec.describe ListOfFiles do
 
       expect(files).to eq([])
     end
+
+    it "returns unique list of files which names are not duplicated" do
+      response = double(
+          :response,
+          is_a?: true,
+          body: '>1234567891123.zip<>1234567891124.zip<1234567891123.zip'
+      )
+      allow(Net::HTTP).to receive(:get_response).and_return(response)
+
+      list_of_files = ListOfFiles.new('')
+      files = list_of_files.files
+
+      expect(files).to eq(['1234567891123.zip', '1234567891124.zip'])
+    end
   end
 end
 

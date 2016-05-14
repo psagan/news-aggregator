@@ -23,7 +23,8 @@ class ListOfFiles
   end
 
   def extract_files
-    response.body.scan(PATTERN)
+    list = response.body.scan(PATTERN)
+    list.uniq
   end
 
   attr_reader :host
