@@ -23,6 +23,20 @@ RSpec.describe ListOfFiles do
       expect { list_of_files.files }.to raise_error(RuntimeError)
       expect { list_of_files.files }.to raise_error("Can't access the host")
     end
+
+    it "returns empty array when no files found in body" do
+      response = double(
+          :response,
+          is_a?: true,
+          body: '>123.zip<>123.zip<'
+      )
+      allow(Net::HTTP).to receive(:get_response).and_return(response)
+
+      list_of_files = ListOfFiles.new('')
+      files = list_of_files.files
+
+      expect(files).to eq([])
+    end
   end
 end
 

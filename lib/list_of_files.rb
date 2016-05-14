@@ -6,7 +6,7 @@ class ListOfFiles
   end
 
   def files
-    @files ||= response.body.scan(PATTERN)
+    @files ||= extract_files
   end
 
   private
@@ -20,6 +20,10 @@ class ListOfFiles
       @response = res
     end
     @response
+  end
+
+  def extract_files
+    response.body.scan(PATTERN)
   end
 
   attr_reader :host
