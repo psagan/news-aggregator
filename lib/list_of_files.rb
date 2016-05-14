@@ -11,6 +11,11 @@ class ListOfFiles
 
   private
 
+  def extract_files
+    list = response.body.scan(PATTERN)
+    list.uniq
+  end
+
   def response
     unless @response
       res = Net::HTTP.get_response(URI(host))
@@ -20,11 +25,6 @@ class ListOfFiles
       @response = res
     end
     @response
-  end
-
-  def extract_files
-    list = response.body.scan(PATTERN)
-    list.uniq
   end
 
   attr_reader :host
