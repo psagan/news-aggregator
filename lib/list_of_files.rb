@@ -19,9 +19,7 @@ class ListOfFiles
   def response
     unless @response
       res = Net::HTTP.get_response(URI(host))
-      unless res.is_a?(Net::HTTPSuccess)
-        raise "Can't access the host"
-      end
+      raise "Can't access the host" unless res.is_a?(Net::HTTPSuccess)
       @response = res
     end
     @response
