@@ -1,31 +1,37 @@
 module OnlineFiles
   class ListOfZipFiles
+
     PATTERN = /\d{13}\.zip/i
 
-    def initialize(host)
-      @host = host
+    def initialize(communication)
+      @communication = communication
     end
 
     def files
-      @files ||= extract_files
+      @files ||= get_files
     end
 
     private
 
-    def extract_files
-      list = response.body.scan(PATTERN)
-      list.uniq
+    def get_files
+      request_for_files
+      files = extract_files_from_response
+      decorate(files)
     end
 
-    def response
-      unless @response
-        res = Net::HTTP.get_response(URI(host))
-        raise "Can't access the host" unless res.is_a?(Net::HTTPSuccess)
-        @response = res
-      end
-      @response
+    def request_for_files
+      communication.request
+      raise "Can't access the host" unless communication.success?
     end
 
-    attr_reader :host
+    def extract_files_from_response
+      communication.content.scan(PATTERN)
+    end
+
+    def decorate(files)
+      files.uniq
+    end
+
+    attr_reader :communication
   end
 end
