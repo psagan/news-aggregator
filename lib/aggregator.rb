@@ -26,6 +26,13 @@ class Aggregator
     cleaner.clean!
   end
 
+  def summary
+    {
+        downloaded_archives: downloader.downloaded_files.length,
+        imported_documents: extractor.extracted_files_count
+    }
+  end
+
   private
 
   def list_of_online_files

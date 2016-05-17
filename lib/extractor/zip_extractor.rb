@@ -40,7 +40,7 @@ class Extractor
     end
 
     def increment_extracted_files_count
-      self.extracted_files_count += 1
+      self.extracted_files_count = self.extracted_files_count + 1
     end
 
     def files_from_path
