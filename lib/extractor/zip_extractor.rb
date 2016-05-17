@@ -1,3 +1,6 @@
+# This is extractor class for ZIP archives.
+# Responsible for extracting zip files and saving them using
+# saver (Strategy Pattern).
 class Extractor
   class Zip
 

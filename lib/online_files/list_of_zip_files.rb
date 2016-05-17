@@ -1,3 +1,4 @@
+# This class is responsible for getting list of zip files available online.
 module OnlineFiles
   class ListOfZipFiles
 

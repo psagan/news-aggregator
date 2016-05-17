@@ -1,3 +1,4 @@
+# This class introduces simple interface for operations on document related containers in redis.
 module Storage
   module Redis
     class DocumentContainer
@@ -10,6 +11,7 @@ module Storage
         @redis = redis
       end
 
+      # save document if not exists (name is md5 from document content)
       def save(name, content)
         return if document_name_exists?(name)
         save_document_name(name)
@@ -23,7 +25,6 @@ module Storage
       end
 
       def save_document_name(name)
-        p name
         redis.sadd(DOCUMENT_NAME_SET, name)
       end
 

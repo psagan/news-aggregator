@@ -1,3 +1,5 @@
+# Files cleaner is responsible for cleaning directory
+# (provided as path param to initializer) from files.
 module Cleaner
   class Filesystem
     def initialize(path)

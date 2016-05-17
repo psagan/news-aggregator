@@ -1,4 +1,5 @@
 # Simple factory method pattern
+# for creating downloaders.
 module Downloader
   class Factory
     def initialize(params)

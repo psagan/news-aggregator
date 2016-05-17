@@ -1,5 +1,7 @@
 require_relative 'base'
 
+# Multithreaded downloader.
+# It downloads multiple files using threads.
 module Downloader
   class Multithreaded < Base
 
@@ -8,6 +10,7 @@ module Downloader
       @number_of_threads = params.fetch(:number_of_threads)
     end
 
+    # Download all files using threads.
     def download_all(file_names)
       queue = Queue.new
       file_names.map { |f| queue << f }

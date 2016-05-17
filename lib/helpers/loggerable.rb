@@ -1,5 +1,5 @@
+# Simple module for logging purposes
 module Loggerable
-
   private
 
   def info(message)
@@ -13,5 +13,4 @@ module Loggerable
   def logger
     @logger ||= ::Logger.new(STDOUT)
   end
-
 end
