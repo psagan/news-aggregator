@@ -7,7 +7,6 @@ class Aggregator
     @archives_container = params.fetch(:archives_container)
     @downloader = params.fetch(:downloader)
     @extractor = params.fetch(:extractor)
-    @cleaner = params.fetch(:cleaner)
     @number_of_threads = params.fetch(:number_of_threads, 0)
   end
 
@@ -24,9 +23,6 @@ class Aggregator
 
     # extract archives directly into redis in fly (using saver strategy inside)
     extractor.extract
-
-    # remove extracted temporary files
-    cleaner.clean!
   end
 
   def summary

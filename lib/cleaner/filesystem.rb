@@ -1,17 +1,8 @@
-# Files cleaner is responsible for cleaning directory
-# (provided as path param to initializer) from files.
+# Files cleaner is responsible for cleaning files
 module Cleaner
   class Filesystem
-    def initialize(path)
-      @path = path
+    def clean!(filename)
+      File.delete(filename)
     end
-
-    def clean!
-      Dir[File.join(path, '*.*')].each { |f| File.delete(f) }
-    end
-
-    private
-
-    attr_reader :path
   end
 end

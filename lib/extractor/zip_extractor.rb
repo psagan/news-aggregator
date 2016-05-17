@@ -13,9 +13,10 @@ class Extractor
     # pattern to detect xml documents inside every archive
     DOCUMENT_PATTERN = File.join('**', '*.xml')
 
-    def initialize(path, saver)
-      @path = path
-      @saver = saver
+    def initialize(params)
+      @path = params.fetch(:path)
+      @saver = params.fetch(:saver)
+      @cleaner = params.fetch(:cleaner)
       @extracted_files_count = 0
     end
 
@@ -34,12 +35,17 @@ class Extractor
           post_save
         end
       end
+      post_extract(file)
     end
 
     private
 
     def post_save
       increment_extracted_files_count
+    end
+
+    def post_extract(file)
+      cleaner.clean!(file)
     end
 
     def increment_extracted_files_count
@@ -57,7 +63,7 @@ class Extractor
       files.sort
     end
 
-    attr_reader :path, :saver
+    attr_reader :path, :saver, :cleaner
     attr_writer :extracted_files_count
   end
 end

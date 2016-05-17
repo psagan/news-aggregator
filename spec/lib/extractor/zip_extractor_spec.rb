@@ -4,7 +4,8 @@ RSpec.describe Extractor::Zip do
     it "saves content by saver" do
       stub_data
       saver = double(:saver, save: true)
-      extractor = Extractor::Zip.new('', saver)
+      cleaner = double(:cleaner, clean!: true)
+      extractor = Extractor::Zip.new(path: '', saver: saver, cleaner: cleaner)
 
       extractor.extract_one('')
 
@@ -17,7 +18,8 @@ RSpec.describe Extractor::Zip do
       stub_data
       allow(Dir).to receive('[]').and_return(['', ''])
       saver = double(:saver, save: true)
-      extractor = Extractor::Zip.new('', saver)
+      cleaner = double(:cleaner, clean!: true)
+      extractor = Extractor::Zip.new(path: '', saver: saver, cleaner: cleaner)
 
       extractor.extract
 
@@ -27,7 +29,7 @@ RSpec.describe Extractor::Zip do
 
   describe "#extracted_files_count" do
     it "equal to zero by default and when no extraction made" do
-      extractor = Extractor::Zip.new('', double(:saver))
+      extractor = Extractor::Zip.new(path: '', saver: double(:saver), cleaner: double(:cleaner))
 
       expect(extractor.extracted_files_count).to eq(0)
     end
@@ -35,7 +37,8 @@ RSpec.describe Extractor::Zip do
     it "counts extracted files when #extract_one in use" do
       stub_data
       saver = double(:saver, save: true)
-      extractor = Extractor::Zip.new('', saver)
+      cleaner = double(:cleaner, clean!: true)
+      extractor = Extractor::Zip.new(path: '', saver: saver, cleaner: cleaner)
 
       extractor.extract_one('')
 
@@ -46,7 +49,8 @@ RSpec.describe Extractor::Zip do
       stub_data
       allow(Dir).to receive('[]').and_return(['', ''])
       saver = double(:saver, save: true)
-      extractor = Extractor::Zip.new('', saver)
+      cleaner = double(:cleaner, clean!: true)
+      extractor = Extractor::Zip.new(path: '', saver: saver, cleaner: cleaner)
 
       extractor.extract
 

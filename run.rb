@@ -25,8 +25,11 @@ aggregator = Aggregator.new(
     online_files: OnlineFiles::ListOfZipFiles.new(Communication::NetHttp.new(host)),
     archives_container: Storage::Redis::ArchivesContainer.new(redis),
     downloader: downloader_factory.create,
-    extractor: Extractor::Zip.new(destination_directory, Storage::Redis::DocumentContainer.new(redis)),
-    cleaner: Cleaner::Filesystem.new(destination_directory)
+    extractor: Extractor::Zip.new(
+        path: destination_directory,
+        saver: Storage::Redis::DocumentContainer.new(redis),
+        cleaner: Cleaner::Filesystem.new(destination_directory)
+    )
 )
 
 # run main method of aggregator - run all processes

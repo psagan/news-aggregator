@@ -13,8 +13,7 @@ RSpec.describe Aggregator do
         online_files: online_files,
         archives_container: archives_container,
         downloader: downloader,
-        extractor: extractor,
-        cleaner: cleaner
+        extractor: extractor
       })
 
       aggregator.run
@@ -24,7 +23,6 @@ RSpec.describe Aggregator do
       expect(downloader).to have_received(:download_all).with(filtered_files)
       expect(archives_container).to have_received(:add_all).with(downloaded_files)
       expect(extractor).to have_received(:extract)
-      expect(cleaner).to have_received(:clean!)
     end
   end
 
@@ -41,8 +39,7 @@ RSpec.describe Aggregator do
         online_files: online_files,
         archives_container: archives_container,
         downloader: downloader,
-        extractor: extractor,
-        cleaner: cleaner
+        extractor: extractor
       })
 
       summary = aggregator.summary
