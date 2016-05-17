@@ -20,11 +20,10 @@ module Downloader
         file.write(com.content)
       end
       downloaded_files << filename
-      info(sprintf('%s - downloaded', filename))
     end
 
     def download_all
-      raise NotImplementedError.new("#{self.class.name}#area is an abstract method.")
+      raise NotImplementedError.new("#{self.class.name}#download_all is an abstract method.")
     end
 
     attr_accessor :downloaded_files
