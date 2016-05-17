@@ -3,7 +3,7 @@ require_relative File.join('simple_autoloader')
 # initial setup
 host = 'http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/'
 destination_directory = 'tmp'
-Dir.exist?(destination_directory) || Dir.mkdir(destination_directory)
+Dir.exist?(destination_directory) || Dir.mkdir(destination_directory, 0755)
 redis_connection = {}
 number_of_threads = ARGV[0]
 
