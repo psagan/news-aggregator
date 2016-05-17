@@ -28,7 +28,7 @@ class Aggregator
 
   def summary
     {
-        downloaded_archives: downloader.downloaded_files.length,
+        downloaded_archives: downloader.downloaded_files_count,
         imported_documents: extractor.extracted_files_count
     }
   end

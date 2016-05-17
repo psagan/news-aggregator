@@ -30,11 +30,11 @@ RSpec.describe Aggregator do
 
   describe "#summary" do
     it "returns summary stats" do
-      downloaded_files = ['a', 'b']
+      downloaded_files_count = 2
       extracted_files_count = 5
       online_files = double(:online_files)
       archives_container = double(:archives_container)
-      downloader = double(:downloader, downloaded_files: downloaded_files)
+      downloader = double(:downloader, downloaded_files_count: downloaded_files_count)
       extractor = double(:extractor, extracted_files_count: extracted_files_count)
       cleaner = double(:cleaner)
       aggregator = Aggregator.new({
@@ -47,7 +47,7 @@ RSpec.describe Aggregator do
 
       summary = aggregator.summary
 
-      expect(summary).to eq({downloaded_archives: downloaded_files.length, imported_documents: extracted_files_count})
+      expect(summary).to eq({downloaded_archives: downloaded_files_count, imported_documents: extracted_files_count})
     end
   end
 end
