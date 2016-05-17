@@ -7,7 +7,7 @@ module Downloader
     end
 
     def create
-      if number_of_threads > 1
+      if !number_of_threads.nil? && number_of_threads > 1
         Multithreaded.new(params)
       else
         Singlethreaded.new(params)
