@@ -1,4 +1,9 @@
+require_relative 'helper'
+
 RSpec.describe Downloader::Base do
+
+  include Spec::Downloader::Helper
+
   describe "#download_one" do
     it "downloads file" do
       content, file, downloader = prepare_download
@@ -42,16 +47,4 @@ RSpec.describe Downloader::Base do
     end
   end
 
-  def prepare_download(success = true)
-    content = double(:content, to_sym: '')
-    communication = double(:http, request: true, success?: success, content: content)
-    communication_class = double(:communication_class, new: communication)
-    file = double(:file)
-    allow(file).to receive(:write)
-    allow(File).to receive(:open).and_yield(file)
-    allow(Logger).to receive(:new).and_return(double(:logger, info: true))
-    downloader = Downloader::Base.new(host: '', destination: '', communication_class: communication_class)
-
-    return content, file, downloader
-  end
 end
