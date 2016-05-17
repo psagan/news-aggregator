@@ -20,10 +20,10 @@ RSpec.describe Downloader::Factory do
       expect(result).to eq(singlethreaded)
     end
 
-    it "creates multithreaded when no of threads greater than 0" do
+    it "creates multithreaded when no of threads greater than 1" do
       multithreaded = double(:multithreaded)
       allow(Downloader::Multithreaded).to receive(:new).and_return(multithreaded)
-      downloader = Downloader::Factory.new(number_of_threads: 1)
+      downloader = Downloader::Factory.new(number_of_threads: 2)
 
       result = downloader.create
 
