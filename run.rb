@@ -28,3 +28,9 @@ aggregator = Aggregator.new(
 
 # run main method of aggregator - run all processes
 aggregator.run
+
+# show summary
+summary = aggregator.summary
+puts " SUMMARY ".center(21, '*')
+puts sprintf("%s archives downloaded", summary[:downloaded_archives])
+puts sprintf("%s documents imported", summary[:imported_documents])
