@@ -5,6 +5,7 @@ require 'rubygems'
 require 'zip'
 require 'net/http'
 require 'redis'
+require 'logger'
 
 # add current path to $LOAD_PATH
 $: << File.join(File.dirname(__FILE__))
