@@ -26,6 +26,10 @@ module Downloader
       raise NotImplementedError.new("#{self.class.name}#download_all is an abstract method.")
     end
 
+    def downloaded_files_count
+      downloaded_files.length
+    end
+
     attr_accessor :downloaded_files
 
     private

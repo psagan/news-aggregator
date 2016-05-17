@@ -47,4 +47,20 @@ RSpec.describe Downloader::Base do
     end
   end
 
+  describe "#downloaded_files_count" do
+    it "is equal to zero when no download made" do
+      content, file, downloader = prepare_download
+
+      expect(downloader.downloaded_files_count).to eq(0)
+    end
+
+    it "returns downloaded files count when #download_one used" do
+      content, file, downloader = prepare_download
+
+      downloader.download_one('')
+
+      expect(downloader.downloaded_files_count).to eq(1)
+    end
+  end
+
 end
