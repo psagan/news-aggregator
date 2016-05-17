@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Downloader
   class Singlethreaded < Base
     def download_all(file_names)

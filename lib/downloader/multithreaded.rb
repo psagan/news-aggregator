@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Downloader
   class Multithreaded < Base
 
