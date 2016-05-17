@@ -1,6 +1,6 @@
 require_relative File.join('simple_autoloader')
 
-# initial setup
+# initial configuration
 host = 'http://feed.omgili.com/5Rh5AMTrc4Pv/mainstream/posts/'
 destination_directory = 'tmp'
 redis_connection = {}
