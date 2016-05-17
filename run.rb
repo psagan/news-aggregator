@@ -28,7 +28,7 @@ aggregator = Aggregator.new(
     extractor: Extractor::Zip.new(
         path: destination_directory,
         saver: Storage::Redis::DocumentContainer.new(redis),
-        cleaner: Cleaner::Filesystem.new(destination_directory)
+        cleaner: Cleaner::Filesystem.new
     )
 )
 
