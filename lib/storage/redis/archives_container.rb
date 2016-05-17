@@ -12,8 +12,8 @@ module Storage
         files.reject { |file| has_archive?(file) }
       end
 
-      def has_archive?(archive_name)
-        redis.sismember(ARCHIVES_SET, archive_name)
+      def add_all(files)
+        files.each { |file| add(file) }
       end
 
       def add(archive_name)
@@ -21,6 +21,10 @@ module Storage
       end
 
       private
+
+      def has_archive?(archive_name)
+        redis.sismember(ARCHIVES_SET, archive_name)
+      end
 
       attr_reader :redis
 
