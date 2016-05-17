@@ -1,6 +1,8 @@
 class Extractor
   class Zip
 
+    attr_reader :extracted_files_count
+
     # pattern to detect archives (this class is responsible
     # for ZIP archives)
     ARCHIVE_PATTERN = '*.zip'
@@ -11,6 +13,7 @@ class Extractor
     def initialize(path, saver)
       @path = path
       @saver = saver
+      @extracted_files_count = 0
     end
 
     def extract
@@ -25,11 +28,20 @@ class Extractor
           # use strategy pattern to save extracted data
           # rule tell, don't ask applied here
           saver.save(entry.name, entry.get_input_stream.read)
+          post_save
         end
       end
     end
 
     private
+
+    def post_save
+      increment_extracted_files_count
+    end
+
+    def increment_extracted_files_count
+      self.extracted_files_count += 1
+    end
 
     def files_from_path
       decorate(Dir[File.join(path, ARCHIVE_PATTERN)])
@@ -43,5 +55,6 @@ class Extractor
     end
 
     attr_reader :path, :saver
+    attr_writer :extracted_files_count
   end
 end

@@ -25,6 +25,35 @@ RSpec.describe Extractor::Zip do
     end
   end
 
+  describe "#extracted_files_count" do
+    it "equal to zero by default and when no extraction made" do
+      extractor = Extractor::Zip.new('', double(:saver))
+
+      expect(extractor.extracted_files_count).to eq(0)
+    end
+
+    it "counts extracted files when #extract_one in use" do
+      stub_data
+      saver = double(:saver, save: true)
+      extractor = Extractor::Zip.new('', saver)
+
+      extractor.extract_one('')
+
+      expect(extractor.extracted_files_count).to eq(1)
+    end
+
+    it "counts extracted files when #extract in use" do
+      stub_data
+      allow(Dir).to receive('[]').and_return(['', ''])
+      saver = double(:saver, save: true)
+      extractor = Extractor::Zip.new('', saver)
+
+      extractor.extract
+
+      expect(extractor.extracted_files_count).to eq(2)
+    end
+  end
+
   def stub_data
     zip_file = double(:zip_file)
     entry = double(:entry, name: true, get_input_stream: double(:is, read: true))
