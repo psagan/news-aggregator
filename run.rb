@@ -9,6 +9,9 @@ number_of_threads = ARGV[0]
 # make temporary dir if doesn't exist
 Dir.exist?(destination_directory) || Dir.mkdir(destination_directory, 0755)
 
+# instance of redis class to communicate with redis
+redis = Redis.new(redis_connection)
+
 # Factory Method Pattern to create downloader
 downloader_factory = Downloader::Factory.new(
     host: host,
@@ -24,9 +27,6 @@ extractor = Extractor::Zip.new(
     saver: Storage::Redis::DocumentContainer.new(redis),
     cleaner: Cleaner::Filesystem.new
 )
-
-# instance of redis class to communicate with redis
-redis = Redis.new(redis_connection)
 
 # I use dependency injection and aggregation (of external objects) approach here
 aggregator = Aggregator.new(
