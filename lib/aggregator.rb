@@ -25,13 +25,6 @@ class Aggregator
     extractor.extract
   end
 
-  def summary
-    {
-        downloaded_archives: downloader.downloaded_files_count,
-        imported_documents: extractor.extracted_files_count
-    }
-  end
-
   private
 
   def list_of_online_files
@@ -39,7 +32,7 @@ class Aggregator
   end
 
   attr_reader :online_files, :archives_container, :downloader,
-              :extractor, :number_of_threads, :cleaner
+              :extractor, :number_of_threads
 
 end
 

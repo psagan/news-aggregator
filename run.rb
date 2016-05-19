@@ -16,6 +16,14 @@ downloader_factory = Downloader::Factory.new(
     communication_class: Communication::NetHttp,
     number_of_threads: number_of_threads
 )
+downloader = downloader_factory.create
+
+# instantiate extractor
+extractor = Extractor::Zip.new(
+    path: destination_directory,
+    saver: Storage::Redis::DocumentContainer.new(redis),
+    cleaner: Cleaner::Filesystem.new
+)
 
 # instance of redis class to communicate with redis
 redis = Redis.new(redis_connection)
@@ -24,19 +32,14 @@ redis = Redis.new(redis_connection)
 aggregator = Aggregator.new(
     online_files: OnlineFiles::ListOfZipFiles.new(Communication::NetHttp.new(host)),
     archives_container: Storage::Redis::ArchivesContainer.new(redis),
-    downloader: downloader_factory.create,
-    extractor: Extractor::Zip.new(
-        path: destination_directory,
-        saver: Storage::Redis::DocumentContainer.new(redis),
-        cleaner: Cleaner::Filesystem.new
-    )
+    downloader: downloader,
+    extractor: extractor
 )
 
 # run main method of aggregator - run all processes
 aggregator.run
 
 # show summary
-summary = aggregator.summary
 puts " SUMMARY ".center(21, '*')
-puts sprintf("%s archives downloaded", summary[:downloaded_archives])
-puts sprintf("%s documents imported", summary[:imported_documents])
+puts sprintf("%d archives downloaded", downloader.downloaded_files_count)
+puts sprintf("%d documents imported", extractor.extracted_files_count)

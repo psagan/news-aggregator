@@ -6,6 +6,8 @@ module Downloader
   class Base
     include Loggerable
 
+    attr_accessor :downloaded_files
+
     def initialize(params)
       @host = params.fetch(:host)
       @destination = params.fetch(:destination)
@@ -35,8 +37,6 @@ module Downloader
     def downloaded_files_count
       downloaded_files.length
     end
-
-    attr_accessor :downloaded_files
 
     private
 
