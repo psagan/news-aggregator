@@ -1,5 +1,5 @@
 # news-aggregator - CLI application
-[![Build Status](https://travis-ci.org/psagan/news-aggregator.svg?branch=master)](https://travis-ci.org/psagan/news-aggregator)
+[![Build Status](https://travis-ci.org/psagan/news-aggregator.svg?branch=master)](https://travis-ci.org/psagan/news-aggregator) [![Code Climate](https://codeclimate.com/github/psagan/news-aggregator/badges/gpa.svg)](https://codeclimate.com/github/psagan/news-aggregator)
 
 To run this CLI application
 Please clone the repository, go to cloned directory and run bundler
